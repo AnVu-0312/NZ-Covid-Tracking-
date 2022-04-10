@@ -10,6 +10,6 @@ Data crawling with SCRAPPY => each data for AN and BA
 <br>
 Tasks:
 1.	a trunk code to crawl data from two websites => Outcome: Json file about data by regions 
-      a. Understanding SCRAPPY
-      b. Try a prototype to crawl the targeted data. If unsuccessful, ask Binh
+      * Understanding SCRAPPY
+      * Try a prototype to crawl the targeted data. If unsuccessful, ask Binh
 2.	A trunk of code to calculate the average percentage/ data/ number
