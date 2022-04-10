@@ -2,7 +2,7 @@
 
 2 parts – 1: data crawling; 2: data visualisation
 <br>
-Data crawling => each data for AN and BA
+Data crawling with SCRAPPY => each data for AN and BA
 <br>
 •	Covid cases by regions in NZ - https://www.health.govt.nz/covid-19-novel-coronavirus/covid-19-data-and-statistics/covid-19-current-cases
 <br>
