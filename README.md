@@ -1,6 +1,7 @@
 # NZ-Covid-Tracking-
 
 2 parts – 1: data crawling; 2: data visualisation
+<br>
 Data crawling => each data for AN and BA
 •	Covid cases by regions in NZ - https://www.health.govt.nz/covid-19-novel-coronavirus/covid-19-data-and-statistics/covid-19-current-cases
 •	Vaccination data by regions in NZ - https://www.health.govt.nz/covid-19-novel-coronavirus/covid-19-data-and-statistics/covid-19-vaccine-data
