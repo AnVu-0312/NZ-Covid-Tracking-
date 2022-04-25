@@ -1,4 +1,6 @@
 import json
+import pandas as pd
+import sys
 import scrapy 
 from scrapy.crawler import CrawlerProcess
 
@@ -10,36 +12,21 @@ class Covid_case(scrapy.Spider):
         for url in urls:
             yield scrapy.Request (url = url, callback = self.parse)
     def parse (self, response):
-        print("\n\n\n\n\n\n\n\n\n\n")
-        print(response.css('.table-style-two>tbody>tr').extract_first())
-        print("\n\n\n\n\n\n\n\n\n\n")
-        # self.log(response)
-
-        # for row in response.xpath('//*[@class="table-style-two table"]//tbody/tr'):
-        for row in response.css('.table-style-two>tbody>tr'):
-            yield {
-                'first' : row.xpath('td[1]//text()').extract_first(),
-                'last': row.xpath('td[2]//text()').extract_first(),
-                'handle' : row.xpath('td[3]//text()').extract_first(),
-            }
-            # print(row)  
-            test = {
-                'first' : row.xpath('td[1]//text()').extract_first(),
-                'last': row.xpath('td[2]//text()').extract_first(),
-                'handle' : row.xpath('td[3]//text()').extract_first(),
-            }
-
-            # test = row.xpath('td[1]//text()').extract_first()
-            # test = {}
-            # test['first'] = row.xpath('td[1]//text()').extract_first()
-            # test['second'] = row.xpath('td[2]//text()').extract_first()
-            print("***************\n\n\n")
-            # print(row.xpath('td[1]//text()').extract_first())
-            # print(json.dump(test))
-            print(test)
-            print(json.dumps(test))
-            print("\n\n\n-----------------\n\n\n")
-
+            data ={}
+            df_covidcase = pd.DataFrame(data, columns=['Location', 'Active','Recovered','Deceased','Total', 'Change in last 24 hours'])
+            covid_case_css = response.xpath('//*[@class="table-style-two table"]//tbody/tr')
+            for row in covid_case_css:
+                data = {
+                    'Location' : row.xpath('td[1]//text()').extract_first(),
+                    'Active': row.xpath('td[2]//text()').extract_first(),
+                    'Recovered' : row.xpath('td[3]//text()').extract_first(),
+                    'Deceased' : row.xpath('td[4]//text()').extract_first(),
+                    'Total' : row.xpath('td[5]//text()').extract_first(),
+                    'Change in last 24 hours' : row.xpath('td[6]//text()').extract_first()
+                    }
+                df_covidcase = df_covidcase.append(data,ignore_index = True)
+            df_covidcase.to_json(r'covid_case.json',orient="records")
+            
 process = CrawlerProcess()
 process.crawl(Covid_case)
 process.start()
